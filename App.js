@@ -16570,8 +16570,6 @@ const RootStack = StackNavigator(
 		Agreement:{
 			screen:AgreementScreen,
 		},
-
-
 		ProductDetail: {
 			screen: ProductDetail,
 			path: 'promoclub/:promoclub',
