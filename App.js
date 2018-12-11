@@ -4575,6 +4575,7 @@ class CheckoutScreen extends React.Component {
 
 
 		};
+		var kupons
 this.confirmorder = this.confirmorder.bind(this);
 this.confirmpaymentid = this.confirmpaymentid.bind(this);
 
@@ -5239,7 +5240,7 @@ this.confirmpaymentid = this.confirmpaymentid.bind(this);
 				this.state.orderid +
 				//'PaymentMethodId=' +this.state.orderpaymenttypeid+
 				'&Codes=' +
-				this.state.kupon +
+				kupons +
 				// '&InstallmentId='+this.props.navigation.state.params.installmentid +
 
 				'&SelectedPaymentMethod=' +
@@ -5251,7 +5252,7 @@ this.confirmpaymentid = this.confirmpaymentid.bind(this);
 			bodyparse=	'OrderId=' +
 				this.state.orderid +
 				'&Codes=' +
-				this.state.kupon +
+				kupons +
 				'&BankPosId=' +
 				'&SelectedPaymentMethod=' +
 				ProjectOrderPaymentMethod +
@@ -5268,7 +5269,7 @@ this.confirmpaymentid = this.confirmpaymentid.bind(this);
 				this.state.orderid +
 				//'PaymentMethodId=' +this.state.orderpaymenttypeid+
 				'&Codes=' +
-				this.state.kupon +
+				kupons+
 				// '&InstallmentId='+this.props.navigation.state.params.installmentid +
 
 				'&SelectedPaymentMethod=' +
@@ -5332,7 +5333,7 @@ this.confirmpaymentid = this.confirmpaymentid.bind(this);
 				'&SecureCode=' +
 				'&CardType=' +
 				'&Codes=' +
-				this.state.kupon;
+				kupons;
 
 
 		}
@@ -5361,7 +5362,7 @@ this.confirmpaymentid = this.confirmpaymentid.bind(this);
 				'&CardType=MASTERCARD' +
 
 				'&Codes=' +
-				this.state.kupon;
+				kupons;
 
 
 
@@ -5565,7 +5566,7 @@ this.confirmpaymentid = this.confirmpaymentid.bind(this);
 			'&IsPaymentSuccess=' +
 			x +
 			'&Codes=' +
-			this.state.kupon,
+			kupons,
 		})
 			.then(response => {
 				const statusCode = response.status;
@@ -5622,7 +5623,7 @@ this.confirmpaymentid = this.confirmpaymentid.bind(this);
 				'&PaymentMethodId=' +
 				insid+
 				'&Codes=' +
-				this.state.kupon,
+				kupons,
 			}
 		)
 			.then(response => {
@@ -5651,7 +5652,7 @@ this.confirmpaymentid = this.confirmpaymentid.bind(this);
 				//alert(error);
 			});
 	}
-
+/*
 	bondcontrol(id) {
 		fetch(API_URL+'/checkout/bond-control', {
 			method: 'POST', timeout: 20000,
@@ -5681,7 +5682,11 @@ this.confirmpaymentid = this.confirmpaymentid.bind(this);
 			})
 			.then(response => {
 				this.dropdown.alertWithType('info', 'Bilgi',JSON.stringify(response.ResultMessage));
+if(response.ResultCode == 'OK' ){
 
+this.setState({kupon:this.state.hediyeceki})
+
+}
 
 				this.setState({ loading: false ,});
 			})
@@ -5689,6 +5694,147 @@ this.confirmpaymentid = this.confirmpaymentid.bind(this);
 			//	this.props.navigation.navigate('Splash');
 				//alert(error);
 			//	this.setState({ loading: false });
+			});
+	}
+	*/
+	bondcontrol(id) {
+		var badi;
+		badi = 'Code=' + id;
+		this.setState({
+			loading:true})
+
+		// this.setState({ kupon: id });
+		fetch(API_URL+'/checkout/bond-control', {
+			method: 'POST', timeout: 20000,
+			headers: {
+				Authorization: 'Bearer ' + this.props.navigation.state.params.token,
+				Accept: 'application/x-www-form-urlencoded',
+				'Content-Type': 'application/x-www-form-urlencoded',
+			},
+
+			body: 'Code=' + id,
+		})
+			.then(response => {
+				const statusCode = response.status;
+				if (statusCode != 200) {
+					//alert('oturum süresi dolmuştur.');
+					self.setState({ loading: false });
+					const resetAction = NavigationActions.reset({
+						index: 0,
+						actions: [NavigationActions.navigate({ routeName: 'Splash' })],
+					});
+
+					self.props.navigation.dispatch(resetAction);
+					self.props.navigation.navigate('Splash');
+				} else {
+					return response.json();
+				}
+			})
+			.then(response => {
+				//alert(JSON.stringify(response));
+				if (response.ResultCode == 'Error') {
+					//alert(response.ResultMessage);
+					return;
+				}
+				if (kupons.indexOf(id) == -1) {
+					kupons=id+','
+					//kupons.push(id);
+					//kupons=
+				} else {
+					kupons=kupons+id+','
+
+					//return;
+				}
+				this.setState({loading:false})
+//alert(kupons)
+				fetch(
+					API_URL+'/checkout/paymentInformation-paymentmethod',
+					{
+						method: 'POST', timeout: 20000,
+						headers: {
+							Authorization:
+							'Bearer ' + this.props.navigation.state.params.token,
+							Accept: 'application/x-www-form-urlencoded',
+							'Content-Type': 'application/x-www-form-urlencoded',
+						},
+
+						body:
+						'SelectedPaymentMethod=' +
+						ProjectOrderPaymentMethod +
+						'&PaymentMethodId=&Codes=' +
+						kupons,
+					}
+				)
+					.then(response => {
+						const statusCode = response.status;
+						if (statusCode != 200) {
+							//alert('oturum süresi dolmuştur.');
+							self.setState({ loading: false });
+							const resetAction = NavigationActions.reset({
+								index: 0,
+								actions: [NavigationActions.navigate({ routeName: 'Splash' })],
+							});
+
+							self.props.navigation.dispatch(resetAction);
+							self.props.navigation.navigate('Splash');
+						} else {
+							return response.json();
+						}
+					})
+					.then(response => {
+						//alert(kupons)
+						// this.setState({ loading: false, cards: response.PaymentTypes });
+						//alert(JSON.stringify(response));
+						this.setState({
+							loading:false,
+							odemebilgileri: response,
+							kupon: kupons,
+							orderpaymenttypeid: response.OrderPaymentTypeId,
+							kupontoplam: response.BondTotal,
+						});
+						// alert(JSON.stringify(this.state.kupon));
+
+						// kupon = [];
+						//if(response.ResultCode!=='OK')return
+						/*
+						for (var i = 0; i < response.BondList.length; i++) {
+							var ind = kupon.indexOf({
+								code: response.BondList[i].Code,
+								price: response.BondList[i].Price,
+							});
+							var dsf = kupons.indexOf(response.BondList[i].Code);
+							//	  alert(ind)
+							if (dsf > -1) {
+								return;
+							} else {
+								kupons.push(response.BondList[i].Code);
+								var strArray = kupons.join(',');
+								// alert(JSON.stringify(strArray))
+
+								kupon.push({
+									code: response.BondList[i].Code,
+									price: response.BondList[i].Price,
+								});
+								//  kupontoplam+=response.BondList[i].Price;
+							}
+						}
+						*/
+						//  alert(this.state.kupon)
+
+						//  alert(JSON.stringify(this.state.kupon));
+						//this.showcart()
+					})
+					.catch(error => {
+						this.props.navigation.navigate('Home');
+						//alert(error);
+					});
+
+				this.setState({ loading: false });
+			})
+			.catch(error => {
+			//	this.props.navigation.navigate('Home');
+				//alert(error);
+				this.setState({ loading: false });
 			});
 	}
 	handleMessage(message) {
@@ -7007,24 +7153,27 @@ return
 
 
 
-				<View style={{ flexDirection: 'column',width:Dimensions.get('window').width-20,justifyContent:'space-between',marginBottom:!!this.state.kupon ?5:0,marginTop:0  }}>
-
-				{!!this.state.kupon &&
-					this.state.kupon.length > 0 && (
-						<Text style={{ fontWeight: '700', color: ColorCode }}>
-						Kupon değerleri:
-						</Text>
-					)}
-
-				{!!this.state.kupon &&
-						this.state.kupon.length > 0 && (
-							<Text>{this.state.kupontoplam} {ProjectOrderPaymentMethod ==2 || ProjectOrderPaymentMethod ==4 ?'Puan':'TL'}</Text>
-						)}
-
-
-				</View>
+			
 				{this.state.currentPosition==1 &&
 					<View style={{borderColor:'#ccc',borderWidth:.8,backgroundColor:'white',padding:10,width:Dimensions.get('window').width-20,borderRadius:5}}>
+					{this.state.kupon && this.state.kupon.length>0&&	
+					<View style={{ flexDirection: 'row',justifyContent:'space-between' ,marginBottom:5,
+							height:this.state.currentPosition==1?null:0,
+					}}>
+
+					<Text style={{ fontWeight: '700', color: ColorCode }}>
+					Kupon Değeri:
+					</Text>
+					<Text>{this.state.kupontoplam} {ProjectOrderPaymentMethod ==2 || ProjectOrderPaymentMethod ==4 ?'Puan':'TL'}</Text>
+
+
+					</View>
+					}
+					
+					
+					
+					
+					
 					<View style={{ flexDirection: 'row',justifyContent:'space-between' ,marginBottom:5,
 							height:this.state.currentPosition==1?null:0,
 					}}>
