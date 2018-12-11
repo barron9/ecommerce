@@ -5733,7 +5733,8 @@ this.setState({kupon:this.state.hediyeceki})
 			.then(response => {
 				//alert(JSON.stringify(response));
 				if (response.ResultCode == 'Error') {
-					//alert(response.ResultMessage);
+					this.setState({loading:false})
+					Alert.alert(response.ResultMessage);
 					return;
 				}
 				if (kupons.indexOf(id) == -1) {
@@ -5746,6 +5747,7 @@ this.setState({kupon:this.state.hediyeceki})
 					//return;
 				}
 				this.setState({loading:false})
+					Alert.alert(response.ResultMessage);
 //alert(kupons)
 				fetch(
 					API_URL+'/checkout/paymentInformation-paymentmethod',
