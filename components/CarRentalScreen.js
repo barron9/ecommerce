@@ -31,6 +31,11 @@ import {
 	BackHandler,
 	Linking,Modal,AlertIOS,Alert
 } from 'react-native';
+import HHeader from './header/HHeader'
+import {API_URL,} from '../App'
+import Lightbox from 'react-native-lightbox';
+import { Button,TextInput,Text,TouchableRipple,FAB,Appbar ,Searchbar,RadioButton,Title,Divider,List,Paragraph,Surface} from 'react-native-paper';
+import { iOSUIKit } from 'react-native-typography';
 
 export default class CarRentalScreen extends React.Component {
 	constructor(props) {
@@ -109,7 +114,7 @@ export default class CarRentalScreen extends React.Component {
 				/>
 				</View>
 			)}
-			<View
+			{/* <View
 			style={{
 				flexDirection: 'row',
 					justifyContent: 'flex-start',
@@ -135,7 +140,10 @@ export default class CarRentalScreen extends React.Component {
 			Enterprise Araç Kiralama
 			</Text>
 			</View>
-			</View>
+			</View> */}
+
+						<HHeader title={this} baslik= "Enterpise Araç Kiralama"/>
+
 
 			<View
 			style={{
@@ -202,16 +210,7 @@ export default class CarRentalScreen extends React.Component {
 						borderRadius: 5,
 				}}>
 				<View style={{ flexDirection: 'column', height: 0 }}>
-				<Text
-				style={{
-					fontWeight: '100',
-						fontSize: 18,
-						// paddingRight: 30,
-						textAlign: 'left',
-						color: 'black',
-				}}>
-				Ürün seçenekleri
-				</Text>
+			
 
 				{this.state.product.ProductOptions && ( //#ffc845
 					<FlatList
@@ -341,8 +340,8 @@ export default class CarRentalScreen extends React.Component {
 				}}>
 				<Text
 				style={[
-					iOSUIKit.caption2,
-					{ paddingLeft: 20, fontWeight: '200', color: 'black' },
+					iOSUIKit.Paragraph,
+					{ paddingLeft: 20, fontWeight: '200', color: 'black', },
 				]}>
 				Dünyanın en büyük araç kiralama şirketi Enterprise'ın
 				Türkiye'deki tüm araçlarını ücretsiz olarak hediye puanlarınızla
@@ -460,7 +459,7 @@ export default class CarRentalScreen extends React.Component {
 								this.state.userid
 							);
 						} else {
-							alert('hata');
+							Alert.alert('Hata Oluştu.');
 						}
 					});
 				}}
@@ -483,7 +482,7 @@ export default class CarRentalScreen extends React.Component {
 
 				<View style={{ flexDirection: 'row', paddingRight: 20 }}>
 				<Text
-				style={{ fontWeight: '400', color: 'white', padding: 5 }}>
+				style={{ fontWeight: '400', color: 'white', padding: 5,fontSize:20 }}>
 				Araç Kirala
 				</Text>
 				</View>

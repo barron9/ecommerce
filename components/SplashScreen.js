@@ -160,7 +160,7 @@ this.retry()
 
 	render() {
 		let borderBottomColor = this.backgroundColor.interpolate({
-        inputRange: [0, 1],
+        inputRange: [0, 2],
         outputRange: ['gray', '#02adef']
     });
 			let asd = this.backgroundColor.interpolate({

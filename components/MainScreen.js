@@ -1556,8 +1556,8 @@ render() {
 						fontWeight:
 					parseInt(item.count) !==
 						parseInt(this.state.selectedtab)
-						? '100'
-						: '100',
+						? '800'
+						: '800',
 				}}>
 				{item.name}
 				</Text>
@@ -1625,7 +1625,7 @@ render() {
 					<Text
 					style={{
 						fontSize: 14,
-							fontWeight: '100',
+							fontWeight: '800',
 							color: 'white',
 					}}>
 					{item.productprice} {ProjectOrderPaymentMethod ==2 || ProjectOrderPaymentMethod ==4 ?'Puan':'TL'}

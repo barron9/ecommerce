@@ -45,7 +45,7 @@ import {StackActions,
 	NavigationActions,
 	addNavigationHelpers,NavigationEvents,//createStackNavigator,createAppContainer,AppNavigator
 } from 'react-navigation'; // 1.1.2
-var kupons
+var kupons=[]
 export default class CheckoutScreen extends React.Component {
 	constructor(props) {
 		super(props);
@@ -178,6 +178,7 @@ this.confirmpaymentid = this.confirmpaymentid.bind(this);
 
 		this.setState({ loading: false });
 	}
+	/*
 	bondcontrol(id) {
 		var badi;
 		badi = 'Code=' + id;
@@ -309,7 +310,7 @@ this.confirmpaymentid = this.confirmpaymentid.bind(this);
 				//alert(error);
 				this.setState({ loading: false });
 			});
-	}
+	*/
 
 	bringcards() {
 		this.state = { loading: true };
@@ -1226,7 +1227,7 @@ this.setState({kupon:this.state.hediyeceki})
 					Alert.alert(response.ResultMessage);
 					return;
 				}
-				if (kupons.indexOf(id) == -1) {
+				if (kupons.indexOf(id) == -1 ) {
 					kupons=id+','
 					//kupons.push(id);
 					//kupons=
@@ -1236,7 +1237,7 @@ this.setState({kupon:this.state.hediyeceki})
 					//return;
 				}
 				this.setState({loading:false})
-					Alert.alert(response.ResultMessage);
+				Alert.alert(response.ResultMessage);
 //alert(kupons)
 				fetch(
 					API_URL+'/checkout/paymentInformation-paymentmethod',
@@ -1324,7 +1325,7 @@ this.setState({kupon:this.state.hediyeceki})
 			})
 			.catch(error => {
 			//	this.props.navigation.navigate('Home');
-				//alert(error);
+				alert(error);
 				this.setState({ loading: false });
 			});
 	}

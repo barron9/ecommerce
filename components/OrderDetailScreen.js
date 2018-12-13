@@ -58,7 +58,8 @@ export default class OrderDetailScreen extends React.Component {
 
 	}
 	render(){
-		return(<ScrollView ><HHeader title={this} baslik= {"Sipariş No: "+ this.props.navigation.state.params.siparisno}/>
+		return(<ScrollView >
+			<HHeader title={this} baslik= {"Sipariş No: "+ this.props.navigation.state.params.siparisno}/>
 			{false &&<Paragraph>{JSON.stringify(this.props.navigation.state.params.data)}</Paragraph>}
 
 <View style={{margin:10}}>
@@ -111,6 +112,7 @@ export default class OrderDetailScreen extends React.Component {
 			<Text>Adres: {this.props.navigation.state.params.data.BillingAddress} {this.props.navigation.state.params.data.BillingCity} {this.props.navigation.state.params.data.BillingTown} {this.props.navigation.state.params.data.BillingCountry}</Text>
 
 			</List.Section>
+			{this.props.navigation.state.params.data.CargoLink!==null &&
 <List.Section  style={{margin:5,elevation:1,borderRadius:5,backgroundColor:'white',padding:10}}>
 			<Title>Kargo Bağlantısı</Title>
 
@@ -118,6 +120,7 @@ export default class OrderDetailScreen extends React.Component {
 				Linking.openURL(this.props.navigation.state.params.data.CargoLink).catch(err => alert('hata oluştu'+err))}}>Kargo Linki: {this.props.navigation.state.params.data.CargoLink!==null?this.props.navigation.state.params.data.CargoLink:'Kargo takip linkiniz henüz oluşmadı'}</Text>
 
 			</List.Section>
+			}
 
 		</View>
 

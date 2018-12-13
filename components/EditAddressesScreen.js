@@ -456,7 +456,7 @@ fetch(
 	})
 	.then(response => {
 		//this.props.navigation.pop()
-		this.dropdown.alertWithType('info', 'Bilgi',JSON.stringify(response.ResultMessage));
+		this.dropdown.alertWithType('info', 'Bilgi',response.ResultMessage);
 
 		// alert(JSON.stringify(response));
 		this.setState({ loading: false ,//done:true
@@ -614,8 +614,9 @@ fetch(
 					borderRadius: 4,
 					color: 'black',
 			}}
-			onChangeText={ceptel => this.setState({ ceptel })}
-			/>
+			onChangeText={ceptel => {if(ceptel.length>10)return;
+				this.setState({ ceptel })
+			}}			/>
 
 			</View>
 			<View

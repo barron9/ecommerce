@@ -350,7 +350,11 @@ export default class RegisterScreen extends React.Component {
 					//	padding: 10,
 					color: 'black',
 			}}
-			onChangeText={ceptel => this.setState({ ceptel })}
+			keyboardType="number-pad"
+			value={this.state.ceptel}
+			onChangeText={ceptel => {if(ceptel.length>10)return;
+				this.setState({ ceptel })
+			}}
 			/>
 			<TextInput
 			mode="outlined"

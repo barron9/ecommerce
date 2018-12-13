@@ -31,7 +31,8 @@ import {
 	BackHandler,
 	Linking,Modal,AlertIOS,Alert
 } from 'react-native';
-import { Button,TextInput,Text,TouchableRipple,FAB,Appbar ,Searchbar,RadioButton,Title,Divider,List,Paragraph,Surface} from 'react-native-paper';
+import { Button,TextInput,Text,TouchableRipple,FAB,Appbar ,Searchbar,RadioButton,Title,Divider,List,Paragraph,Surface,IconButton
+} from 'react-native-paper';
 import EIcon from 'react-native-vector-icons/EvilIcons'; // 4.5.0
 import {API_URL} from '../App'
 import EnIcon from 'react-native-vector-icons/Entypo'; // 4.5.0
@@ -261,6 +262,12 @@ export default class SearchScreen extends React.Component {
 				this.setState({ searchstarted: true });
 			}}
 			/>
+			 <IconButton
+    icon="add-a-photo"
+    color="red"
+    size={20}
+    onPress={() => console.log('Pressed')}
+  />
 
 
 
@@ -290,7 +297,7 @@ export default class SearchScreen extends React.Component {
 				</TouchableOpacity>
 			)}
 			</View>
-			{this.state.aralik && (
+			{!this.state.aralik && (
 				<View style={{ flexDirection: 'row' }}>
 				<View
 				style={{
@@ -322,6 +329,15 @@ export default class SearchScreen extends React.Component {
 					this.setState({ searchp1: searchp1 });
 				}}
 				value={this.state.searchp1}
+
+				onSubmitEditing={() => {
+					this.searchaction(
+						this.state.searchtext,
+						this.state.searchp1,
+						this.state.searchp2
+					);
+					this.setState({ searchstarted: true });
+				}}
 				/>
 
 				<TextInput
@@ -350,6 +366,14 @@ export default class SearchScreen extends React.Component {
 					this.setState({ searchp2: searchp2 });
 				}}
 				value={this.state.searchp2}
+				onSubmitEditing={() => {
+					this.searchaction(
+						this.state.searchtext,
+						this.state.searchp1,
+						this.state.searchp2
+					);
+					this.setState({ searchstarted: true });
+				}}
 				/>
 
 				{!this.state.grid&&

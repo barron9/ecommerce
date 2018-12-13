@@ -178,6 +178,8 @@ fetch(API_URL+'/customer/myaccount', {
 			/>
 <TextInput
 			label={"Telefon Numarası"}
+			keyboardType="number-pad"
+
 			style={{
 				width: Dimensions.get('window').width -20,
 					margin:10,
@@ -185,9 +187,10 @@ fetch(API_URL+'/customer/myaccount', {
 					color: 'black',
 			}}
 			mode="outlined"
-
-			onChangeText={gsm => this.setState({ gsm })}
 			value={this.state.gsm}
+			onChangeText={gsm => {if(gsm.length>10)return;
+				this.setState({ gsm })}}		
+					value={this.state.gsm}
 			/>
 
 
