@@ -32,6 +32,8 @@ import {
 	BackHandler,
 	Linking,Modal,AlertIOS,Alert
 } from 'react-native';
+import HHeader from './header/HHeader'
+import { Button,TextInput,Text,TouchableRipple,FAB,Appbar ,Searchbar,RadioButton,Title,Divider,List,Paragraph,Surface} from 'react-native-paper';
 
 export default class OrderDetailScreen extends React.Component {
 	constructor(props) {

@@ -31,7 +31,9 @@ import {
 	BackHandler,
 	Linking,Modal,AlertIOS,Alert
 } from 'react-native';
-import {API_URL,SLOW_NETWORK_T,styles,ProjectOrderPaymentMethod,deviceid,ColorCode} from '../App'
+import Share from 'react-native-share';
+
+import {API_URL,SLOW_NETWORK_T,styles,ProjectOrderPaymentMethod,deviceid,ColorCode,shareOptions} from '../App'
 import { Button,TextInput,Text,TouchableRipple,FAB,Appbar ,Searchbar,RadioButton,Title,Divider,List,Paragraph,Surface} from 'react-native-paper';
 import { FloatingAction } from 'react-native-floating-action'; // 1.10.1
 import Icon from 'react-native-vector-icons/FontAwesome'; // 4.5.0

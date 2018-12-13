@@ -31,6 +31,12 @@ import {
 	BackHandler,
 	Linking,Modal,AlertIOS,Alert
 } from 'react-native';
+import HHeader from './header/HHeader'
+import { Button,TextInput,Text,TouchableRipple,FAB,Appbar ,Searchbar,RadioButton,Title,Divider,List,Paragraph,Surface} from 'react-native-paper';
+import {API_URL,pickerSelectStyles,styles} from '../App'
+import Drawer from 'react-native-drawer-menu'; // 0.2.5
+import Icon from 'react-native-vector-icons/FontAwesome'; // 4.5.0
+import EnIcon from 'react-native-vector-icons/Entypo'; // 4.5.0
 
 export default class CategoryDetail extends React.Component {
 	constructor(props) {

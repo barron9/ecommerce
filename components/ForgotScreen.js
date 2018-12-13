@@ -31,7 +31,13 @@ import {
 	BackHandler,
 	Linking,Modal,AlertIOS,Alert
 } from 'react-native';
+ import {API_URL,SLOW_NETWORK_T,styles,ProjectOrderPaymentMethod,deviceid,ColorCode} from '../App'
+ 
+import DropdownAlert from 'react-native-dropdownalert';
+ 
 
+import { Button,TextInput,Text,TouchableRipple,FAB,Appbar ,Searchbar,RadioButton,Title,Divider,List,Paragraph,Surface} from 'react-native-paper';
+import HHeader from './header/HHeader'
 export default class ForgotScreen extends React.Component {
 	constructor(props) {
 		super(props);

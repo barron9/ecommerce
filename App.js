@@ -174,7 +174,7 @@ export var ColorCode = "#02adef"
 
 
 	 type AlertType = 'info' | 'warn' | 'error' | 'success';
-	 var shareOptions = {
+	export var shareOptions = {
 		 title: 'Paylaş',
 		 url: 'https://kurumsalb2c.com/B2C/product/',
 		 social: Share.Social.EMAIL
