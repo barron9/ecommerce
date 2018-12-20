@@ -244,7 +244,7 @@ export default class SearchScreen extends React.Component {
 			title="Arama"
 			subtitle={this.state.searchtext?this.state.searchtext:''}        />
 
-			<Appbar.Action icon="more-vert" onPress={()=>this.setState({aralik:!this.state.aralik})} />
+			{/* <Appbar.Action icon="filter" onPress={()=>this.setState({aralik:!this.state.aralik})} /> */}
 
 			</Appbar.Header>
 			<Searchbar
@@ -262,12 +262,7 @@ export default class SearchScreen extends React.Component {
 				this.setState({ searchstarted: true });
 			}}
 			/>
-			 <IconButton
-    icon="add-a-photo"
-    color="red"
-    size={20}
-    onPress={() => console.log('Pressed')}
-  />
+	
 
 
 
@@ -376,12 +371,20 @@ export default class SearchScreen extends React.Component {
 				}}
 				/>
 
-				{!this.state.grid&&
+				{!this.state.grid&&false&&
 					<EnIcon name="grid" onPress={()=>this.setState({grid:!this.state.grid})} size={25} color="black" />
 				}
-				{this.state.grid&&
+				{this.state.grid&&false&&
 						<EnIcon name="text" onPress={()=>this.setState({grid:!this.state.grid})} size={25} color="black" />
 				}
+						<Text  style={{marginRight:10,fontWeight:'800'}} onPress={() => {
+					this.searchaction(
+						this.state.searchtext,
+						this.state.searchp1,
+						this.state.searchp2
+					);
+					this.setState({ searchstarted: true });
+				}} size={16} color="black" >Ara</Text>
 
 				</View>
 
